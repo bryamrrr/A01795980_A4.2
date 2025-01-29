@@ -11,8 +11,10 @@
 # Test cases and evidence
 # Record the execution. Use files included in the assignment.
 
-# Function to read a file with numbers
-def read_file(filename):
+import sys
+import time
+
+def read_numbers_from_file(filename):
     numbers = []
     with open(filename, 'r') as file:
         for line in file:
@@ -52,3 +54,36 @@ def calculate_variance(numbers, mean):
         total += (num - mean) ** 2
     return total / len(numbers)
 
+def main():
+    input_file = sys.argv[1]
+    output_file = "StatisticsResults.txt"
+
+    start_time = time.time()
+
+    numbers = read_numbers_from_file(input_file)
+
+    mean = calculate_mean(numbers)
+    median = calculate_median(numbers)
+    mode = calculate_mode(numbers)
+    variance = calculate_variance(numbers, mean)
+    std_deviation = calculate_standard_deviation(variance)
+
+    elapsed_time = time.time() - start_time
+
+    results = (
+        f"Descriptive Statistics:\n"
+        f"Mean: {mean}\n"
+        f"Median: {median}\n"
+        f"Mode: {mode}\n"
+        f"Variance: {variance}\n"
+        f"Standard Deviation: {std_deviation}\n"
+        f"Execution Time: {elapsed_time:.2f} seconds\n"
+    )
+
+    print(results)
+
+    with open(output_file, 'w') as file:
+        file.write(results)
+
+if __name__ == "__main__":
+    main()

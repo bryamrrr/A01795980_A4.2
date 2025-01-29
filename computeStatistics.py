@@ -18,3 +18,37 @@ def read_file(filename):
         for line in file:
             numbers.append(float(line.strip()))
     return numbers
+
+# Descriptive statistics
+def calculate_mean(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total / len(numbers)
+
+def calculate_median(numbers):
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    mid = n // 2
+    if n % 2 == 0:
+        return (sorted_numbers[mid - 1] + sorted_numbers[mid]) / 2
+    else:
+        return sorted_numbers[mid]
+
+def calculate_mode(numbers):
+    frequency = {}
+    for num in numbers:
+        frequency[num] = frequency.get(num, 0) + 1
+    max_freq = max(frequency.values())
+    modes = [key for key, val in frequency.items() if val == max_freq]
+    return modes if len(modes) > 1 else modes[0]
+
+def calculate_standard_deviation(variance):
+    return variance ** 0.5
+
+def calculate_variance(numbers, mean):
+    total = 0
+    for num in numbers:
+        total += (num - mean) ** 2
+    return total / len(numbers)
+

@@ -138,7 +138,6 @@ def main():
     
     Raises:
         FileNotFoundError: If the input file does not exist.
-        Exception: For unexpected errors.
     """
     if len(sys.argv) != 2:
         print("Usage: python computeStatistics.py fileWithData.txt")
@@ -151,10 +150,6 @@ def main():
         start_time = time.time()
 
         numbers = read_numbers_from_file(input_file)
-
-        if not numbers:
-            print("No valid data in the file.")
-            sys.exit(1)
 
         mean = calculate_mean(numbers)
         median = calculate_median(numbers)
